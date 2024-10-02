@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SecretsService.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+53f270e406aef688dec49e598a3dd6e6abeace69")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+74d1fb4a38ea0cf128c0fb48cc67f936db4bf7b0")]
 [assembly: System.Reflection.AssemblyProductAttribute("SecretsService.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SecretsService.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
