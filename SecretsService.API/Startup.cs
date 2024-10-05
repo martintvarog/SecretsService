@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using SecretsService.DataAccess.Context;
 using SecretsService.Service.Contracts;
 using Microsoft.OpenApi.Models;
+using SecretsService.API.Middlewares.Exceptions;
 
 namespace SecretsService.API
 {
@@ -35,6 +36,7 @@ namespace SecretsService.API
                 options.Audience = "<your-auth0-audience>";
             });
 
+
             services.AddScoped<ISecretsService, Service.Services.SecretsService>();
             services.AddDataProtection();
             services.AddDbContext<SecretsDbContext>(options =>
@@ -47,6 +49,8 @@ namespace SecretsService.API
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SecretsService API V1"));
