@@ -1,9 +1,11 @@
-using SecretsService.DataAccess.Context;
-using SecretsService.Service.Contracts;
 using Microsoft.AspNetCore.DataProtection;
+using SecretsService.Service.Contracts;
+
 using Microsoft.EntityFrameworkCore;
+using SecretsService.Model.Context;
 using SecretsService.Service.Requests;
-using Secret = SecretsService.DataAccess.Secret;
+using Secret = SecretsService.Model.Secret;
+
 
 namespace SecretsService.Service.Services;
 

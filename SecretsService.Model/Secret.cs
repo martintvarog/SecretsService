@@ -1,4 +1,4 @@
-namespace SecretsService.DataAccess;
+namespace SecretsService.Model;
 
 /// <summary>
 /// Represents a secret.

@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace SecretsService.DataAccess.Context;
+namespace SecretsService.Model.Context;
 
 public class SecretsDbContext : DbContext
 {

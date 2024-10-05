@@ -1,12 +1,9 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using SecretsService.DataAccess.Context;
 using SecretsService.Service.Contracts;
 using Microsoft.OpenApi.Models;
 using SecretsService.API.Middlewares.Exceptions;
+using SecretsService.Model.Context;
 
 namespace SecretsService.API
 {

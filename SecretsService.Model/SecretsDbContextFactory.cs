@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
-using SecretsService.DataAccess.Context;
+using SecretsService.Model.Context;
 
-namespace SecretsService.DataAccess
+namespace SecretsService.Model
 {
     public class SecretsDbContextFactory : IDesignTimeDbContextFactory<SecretsDbContext>
     {
