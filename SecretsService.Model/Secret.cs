@@ -8,7 +8,7 @@ public class Secret
     /// <summary>
     /// The unique identifier of the secret.
     /// </summary>
-    public int Id { get; set; }
+    public int SecretId { get; set; }
 
     /// <summary>
     /// The name of the secret that is unique.
