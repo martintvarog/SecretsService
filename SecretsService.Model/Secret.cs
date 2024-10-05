@@ -23,10 +23,10 @@ public class Secret
     /// <summary>
     /// The date and time the secret was created.
     /// </summary>
-    public DateTime CreatedAt { get; set; }
+    public DateTimeOffset CreatedAt { get; set; }
 
     /// <summary>
     /// The date and time the secret was last updated.
     /// </summary>
-    public DateTime UpdatedAt { get; set; }
+    public DateTimeOffset UpdatedAt { get; set; }
 }
