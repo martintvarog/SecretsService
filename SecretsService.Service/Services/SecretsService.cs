@@ -9,18 +9,20 @@ namespace SecretsService.Service.Services;
 
 public class SecretsService : ISecretsService
 {
+    private const string DataProtectionPurpose = "SecretsService.SecretsService";
+    
     private readonly SecretsDbContext _context;
     private readonly IDataProtector _dataProtector;
 
     public SecretsService(SecretsDbContext context, IDataProtectionProvider dataProtectionProvider)
     {
         _context = context;
-        _dataProtector = dataProtectionProvider.CreateProtector("SecretsService.SecretsService");
+        _dataProtector = dataProtectionProvider.CreateProtector(DataProtectionPurpose);
     }
 
     public async Task<SecretDto?> GetSecretAsync(string name, CancellationToken cancellationToken)
     {
-        var secret = await _context.Secrets.FindAsync([name], cancellationToken);
+        var secret = await _context.Secrets.FirstOrDefaultAsync(s => s.Name == name, cancellationToken);
 
         if (secret == null) return null;
 
