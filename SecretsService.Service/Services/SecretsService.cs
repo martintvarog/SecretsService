@@ -2,6 +2,7 @@ using SecretsService.Service.Contracts;
 using Microsoft.EntityFrameworkCore;
 using SecretsService.Model.Context;
 using SecretsService.Service.Requests;
+using SecretsService.Service.Results;
 using Secret = SecretsService.Model.Secret;
 
 
@@ -18,7 +19,7 @@ public class SecretsService : ISecretsService
         _dataProtector = dataProtectionProvider;
     }
 
-    public async Task<SecretDto?> GetSecretAsync(string name, CancellationToken cancellationToken)
+    public async Task<SecretsResult?> GetSecretAsync(string name, CancellationToken cancellationToken)
     {
         var secret = await _context.Secrets.FirstOrDefaultAsync(s => s.Name == name, cancellationToken);
 
@@ -26,21 +27,28 @@ public class SecretsService : ISecretsService
 
         var decryptedValue = _dataProtector.Unprotect(secret.Value);
 
-        return new SecretDto { Name = secret.Name, Value = decryptedValue };
+        return new SecretsResult()
+        {
+            SecretId = secret.SecretId,
+            Name = secret.Name,
+            Value = decryptedValue,
+            CreatedAt = secret.CreatedAt,
+            UpdatedAt = secret.UpdatedAt
+        };
     }
 
-    public async Task StoreSecretAsync(SecretDto secretDto, CancellationToken cancellationToken)
+    public async Task StoreSecretAsync(SecretsRequest secretsRequest, CancellationToken cancellationToken)
     {
-        await ValidateUniqueNameAsync(secretDto.Name, cancellationToken);
+        await ValidateUniqueNameAsync(secretsRequest.Name, cancellationToken);
 
-        var encryptedValue = _dataProtector.Protect(secretDto.Value);
+        var encryptedValue = _dataProtector.Protect(secretsRequest.Value);
 
         var secret = new Secret
         {
-            Name = secretDto.Name,
+            Name = secretsRequest.Name,
             Value = encryptedValue,
-            CreatedAt = DateTime.UtcNow,
-            UpdatedAt = DateTime.UtcNow
+            CreatedAt = DateTimeOffset.Now,
+            UpdatedAt = DateTimeOffset.Now
         };
 
         _context.Secrets.Add(secret);

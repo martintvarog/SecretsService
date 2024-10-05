@@ -5,7 +5,7 @@ namespace SecretsService.Service.Requests;
 /// <summary>
 /// Data transfer object for a secret.
 /// </summary>
-public record class SecretDto
+public record class SecretsRequest
 {
     /// <summary>
     /// Name of the secret.
