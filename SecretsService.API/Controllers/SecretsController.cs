@@ -15,9 +15,9 @@ namespace SecretsService.API.Controllers
         }
 
         [HttpGet("{name}")]
-        public async Task<IActionResult> GetSecret(string name)
+        public async Task<IActionResult> GetSecret(string name, CancellationToken cancellationToken)
         {
-            var secret = await _secretsService.GetSecretAsync(name);
+            var secret = await _secretsService.GetSecretAsync(name, cancellationToken);
             if (secret == null)
             {
                 return NotFound();
@@ -26,9 +26,9 @@ namespace SecretsService.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> StoreSecret([FromBody] SecretDto secretDto)
+        public async Task<IActionResult> StoreSecret([FromBody] SecretDto secretDto, CancellationToken cancellationToken)
         {
-            await _secretsService.StoreSecretAsync(secretDto);
+            await _secretsService.StoreSecretAsync(secretDto, cancellationToken);
             return CreatedAtAction(nameof(GetSecret), new { name = secretDto.Name }, secretDto);
         }
     }
