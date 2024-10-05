@@ -4,6 +4,9 @@ using SecretsService.Service.Requests;
 
 namespace SecretsService.API.Controllers
 {
+    /// <summary>
+    /// Controller for managing secrets.
+    /// </summary>
     [ApiController]
     [Route("api/[controller]")]
     public class SecretsController : ControllerBase
