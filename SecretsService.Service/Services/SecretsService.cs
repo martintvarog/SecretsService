@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using SecretsService.Service.Contracts;
 using Microsoft.EntityFrameworkCore;
 using SecretsService.Model.Context;
@@ -60,7 +61,7 @@ public class SecretsService : ISecretsService
     {
         if (await _context.Secrets.AnyAsync(s => s.Name == name, cancellationToken))
         {
-            throw new InvalidOperationException($"Secret with name '{name}' already exists.");
+            throw new ValidationException($"Secret with name '{name}' already exists.");
         }
     }
 }

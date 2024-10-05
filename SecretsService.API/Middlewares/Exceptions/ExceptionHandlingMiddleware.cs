@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Text.Json;
 
@@ -18,7 +19,7 @@ public class ExceptionHandlingMiddleware
         {
             await _next(context);
         }
-        catch (InvalidOperationException ex)
+        catch (ValidationException ex)
         {
             await HandleExceptionAsync(context, ex, HttpStatusCode.BadRequest);
         }
