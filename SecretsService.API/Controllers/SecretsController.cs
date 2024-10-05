@@ -1,13 +1,10 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SecretsService.Service;
 using SecretsService.Service.Contracts;
 
 namespace SecretsService.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
     public class SecretsController : ControllerBase
     {
         private readonly ISecretsService _secretsService;
