@@ -21,8 +21,7 @@ public class SecretsServiceTests : SecretsInMemoryDb
 
         var persistedSecret = new Secret
         {
-            SecretId = 1,
-            Name = "TestSecret",
+            Name = "GetSecretTest",
             Value = "EncryptedValue",
             UpdatedAt = _today,
             CreatedAt = _today
@@ -37,14 +36,14 @@ public class SecretsServiceTests : SecretsInMemoryDb
         var secretsService = InitializeSecretsService(context, dataProtector);
 
         // Act
-        var secret = await secretsService.GetSecretAsync(persistedSecret.Name, default);
+        var result = await secretsService.GetSecretAsync(persistedSecret.Name, default);
 
         // Assert
-        Assert.NotNull(secret);
-        Assert.Equal("DecryptedValue", secret.Value);
-        Assert.Equal(persistedSecret.Name, secret.Name);
-        Assert.Equal(persistedSecret.UpdatedAt, secret.UpdatedAt);
-        Assert.Equal(persistedSecret.CreatedAt, secret.CreatedAt);
+        Assert.NotNull(result);
+        Assert.Equal("DecryptedValue", result.Value);
+        Assert.Equal(persistedSecret.Name, result.Name);
+        Assert.Equal(persistedSecret.UpdatedAt, result.UpdatedAt);
+        Assert.Equal(persistedSecret.CreatedAt, result.CreatedAt);
     }
 
     [Fact]
@@ -54,10 +53,10 @@ public class SecretsServiceTests : SecretsInMemoryDb
         var secretsService = InitializeSecretsService();
 
         // Act
-        var secret = await secretsService.GetSecretAsync("NonExistentSecret", default);
+        var result = await secretsService.GetSecretAsync("NonExistentSecret", default);
 
         // Assert
-        Assert.Null(secret);
+        Assert.Null(result);
     }
 
     [Fact]
@@ -73,7 +72,7 @@ public class SecretsServiceTests : SecretsInMemoryDb
 
         var request = new Service.Requests.SecretsRequest
         {
-            Name = "TestSecret",
+            Name = "UpdateSecretTest",
             Value = "DecryptedValue"
         };
 
@@ -81,11 +80,11 @@ public class SecretsServiceTests : SecretsInMemoryDb
         await secretsService.StoreSecretAsync(request, default);
 
         // Assert
-        var secret = await context.Secrets.FirstOrDefaultAsync(s => s.Name == request.Name);
+        var result = await context.Secrets.FirstOrDefaultAsync(s => s.Name == request.Name);
 
-        Assert.NotNull(secret);
-        Assert.Equal(request.Name, secret.Name);
-        Assert.Equal("EncryptedValue", secret.Value);
+        Assert.NotNull(result);
+        Assert.Equal(request.Name, result.Name);
+        Assert.Equal("EncryptedValue", result.Value);
     }
 
     [Fact]
@@ -96,7 +95,6 @@ public class SecretsServiceTests : SecretsInMemoryDb
 
         var persistedSecret = new Secret
         {
-            SecretId = 1,
             Name = "TestSecret",
             Value = "EncryptedValue",
             UpdatedAt = _today,
