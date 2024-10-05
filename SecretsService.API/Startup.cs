@@ -36,6 +36,8 @@ namespace SecretsService.API
 
             services.AddScoped<ISecretsService, Service.Services.SecretsService>();
             services.AddDataProtection();
+            services.AddScoped<ISecretsDataProtector, Service.Services.SecretsDataProtector>();
+
             services.AddDbContext<SecretsDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
@@ -46,7 +48,7 @@ namespace SecretsService.API
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+
             app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             app.UseSwagger();

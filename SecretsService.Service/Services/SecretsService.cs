@@ -1,6 +1,4 @@
-using Microsoft.AspNetCore.DataProtection;
 using SecretsService.Service.Contracts;
-
 using Microsoft.EntityFrameworkCore;
 using SecretsService.Model.Context;
 using SecretsService.Service.Requests;
@@ -11,15 +9,13 @@ namespace SecretsService.Service.Services;
 
 public class SecretsService : ISecretsService
 {
-    private const string DataProtectionPurpose = "SecretsService.SecretsService";
-    
     private readonly SecretsDbContext _context;
-    private readonly IDataProtector _dataProtector;
+    private readonly ISecretsDataProtector _dataProtector;
 
-    public SecretsService(SecretsDbContext context, IDataProtectionProvider dataProtectionProvider)
+    public SecretsService(SecretsDbContext context, ISecretsDataProtector dataProtectionProvider)
     {
         _context = context;
-        _dataProtector = dataProtectionProvider.CreateProtector(DataProtectionPurpose);
+        _dataProtector = dataProtectionProvider;
     }
 
     public async Task<SecretDto?> GetSecretAsync(string name, CancellationToken cancellationToken)
