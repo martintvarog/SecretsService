@@ -36,6 +36,7 @@ namespace SecretsService.API
             });
 
             services.AddScoped<ISecretsService, Service.Services.SecretsService>();
+            services.AddDataProtection();
             services.AddDbContext<SecretsDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
         }
