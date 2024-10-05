@@ -44,7 +44,7 @@ namespace SecretsService.API.Controllers
         /// <response code="400">If the secret with the same name already exists.</response>
         /// <returns>An <see cref="IActionResult"/> containing the stored secret if successful, otherwise a 400 Bad Request status.</returns>
         [ProducesResponseType(typeof(SecretDto), StatusCodes.Status201Created)]
-        [ProducesResponseType(typeof(InvalidOperationException), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [HttpPost]
         public async Task<IActionResult> StoreSecret([FromBody] SecretDto secretDto,
             CancellationToken cancellationToken)
