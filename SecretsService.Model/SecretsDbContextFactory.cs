@@ -11,8 +11,7 @@ namespace SecretsService.Model
         {
             var optionsBuilder = new DbContextOptionsBuilder<SecretsDbContext>();
 
-            // Configure the connection string
-            IConfigurationRoot configuration = new ConfigurationBuilder()
+            var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.Development.json")
                 .AddUserSecrets<SecretsDbContextFactory>()
