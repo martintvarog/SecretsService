@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using SecretsService.Service.Contracts;
 using Microsoft.OpenApi.Models;
@@ -23,16 +22,6 @@ namespace SecretsService.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SecretsService API", Version = "v1" });
             });
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options =>
-            {
-                options.Authority = "https://<your-auth0-domain>/";
-                options.Audience = "<your-auth0-audience>";
-            });
-
 
             services.AddScoped<ISecretsService, Service.Services.SecretsService>();
             services.AddDataProtection();
@@ -55,8 +44,6 @@ namespace SecretsService.API
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SecretsService API V1"));
 
             app.UseRouting();
-            app.UseAuthentication();
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
