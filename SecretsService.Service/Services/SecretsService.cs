@@ -6,7 +6,6 @@ using SecretsService.Service.Requests;
 using SecretsService.Service.Results;
 using Secret = SecretsService.Model.Secret;
 
-
 namespace SecretsService.Service.Services;
 
 public class SecretsService : ISecretsService

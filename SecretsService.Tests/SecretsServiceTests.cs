@@ -123,7 +123,6 @@ public class SecretsServiceTests : SecretsInMemoryDb
         Assert.IsAssignableFrom<ValidationException>(exception);
     }
 
-
     private ISecretsService InitializeSecretsService(SecretsDbContext? context = null,
         ISecretsDataProtector? dataProtectionProvider = null)
     {

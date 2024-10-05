@@ -13,5 +13,4 @@ public class SecretsInMemoryDb
 
         return new SecretsDbContext(options);
     }
-    
 }
